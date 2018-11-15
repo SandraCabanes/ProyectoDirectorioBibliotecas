@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class Provincia {
     private String cod_provincia;
-    private String num_provincia;
+    private String nom_provincia;
     private ArrayList<Municipio>municipios=new ArrayList<>();
 
     public Provincia(String cod_provincia, String num_provincia) {
         this.cod_provincia = cod_provincia;
-        this.num_provincia = num_provincia;
+        this.nom_provincia = num_provincia;
     }
 
     public Provincia() {
@@ -32,12 +32,12 @@ public class Provincia {
         this.cod_provincia = cod_provincia;
     }
 
-    public String getNum_provincia() {
-        return num_provincia;
+    public String getNom_provincia() {
+        return nom_provincia;
     }
 
-    public void setNum_provincia(String num_provincia) {
-        this.num_provincia = num_provincia;
+    public void setNom_provincia(String nom_provincia) {
+        this.nom_provincia = nom_provincia;
     }
 
     public ArrayList<Municipio> getMunicipios() {
@@ -57,7 +57,7 @@ public class Provincia {
     @Override
     public String toString() {
         return "Provincia:\n" + "\tCod_provincia: " + cod_provincia 
-                + "\n\tNum_provincia: " + num_provincia 
+                + "\n\tNum_provincia: " + nom_provincia 
                 + "\n\tMunicipios: " + municipios;
     }
      

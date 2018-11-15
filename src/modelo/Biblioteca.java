@@ -10,6 +10,7 @@ package modelo;
  * @author Sandra
  */
 public class Biblioteca {
+    private int id;
     private String tipo;
     private String nombre;
     private String direccion;
@@ -32,6 +33,15 @@ public class Biblioteca {
         this.email = email;
         this.catalogo = catalogo;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String getTipo() {
         return tipo;

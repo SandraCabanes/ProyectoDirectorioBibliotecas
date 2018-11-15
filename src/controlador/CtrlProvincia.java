@@ -49,7 +49,7 @@ public class CtrlProvincia extends CtrlDom {
         Provincia provincia = new Provincia();
 
         provincia.setCod_provincia(getValorEtiqueta(ET_CODPROVINCIA, elemProvincia));
-        provincia.setNum_provincia(getValorEtiqueta(ET_NUMPROVINCIA, elemProvincia));
+        provincia.setNom_provincia(getValorEtiqueta(ET_NUMPROVINCIA, elemProvincia));
 
         Element elemMunicipio = getElementEtiqueta(ET_MUNICIPIOS, elemProvincia);
         provincia.setMunicipios(leerMunicipios(elemMunicipio));
@@ -111,7 +111,7 @@ public class CtrlProvincia extends CtrlDom {
 
         //Num_provincia
         Element elemNum_prov = doc.createElement(ET_NUMPROVINCIA);
-        elemNum_prov.setTextContent(prov.getNum_provincia());
+        elemNum_prov.setTextContent(prov.getNom_provincia());
         elemProvincia.appendChild(elemNum_prov);
 
         //Municipios

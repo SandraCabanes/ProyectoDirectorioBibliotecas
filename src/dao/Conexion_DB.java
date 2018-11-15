@@ -21,7 +21,7 @@ public class Conexion_DB {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String urlOdbc="jdbc:mysql://localhost:3306/directoriobibliotecas";
-            con=java.sql.DriverManager.getConnection(urlOdbc, "directoriobibliotecas", "directoriobibliotecas");
+            con=java.sql.DriverManager.getConnection(urlOdbc, "root", "");
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Conexion_DB.class.getName()).log(Level.SEVERE, null, ex);
