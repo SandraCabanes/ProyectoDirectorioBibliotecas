@@ -51,14 +51,15 @@ public class MunicipioDAO {
             }
         } 
     }
-    public void inserta(Connection con, Municipio municipio, String cod_provincia) throws Exception{
+    public void inserta(Connection con, Municipio municipio) throws Exception{
         PreparedStatement stmt=null;
         
         try{
-            stmt=con.prepareStatement("INSERT INTO municipio (cod_municipio, cod_provincia) VALUES(?,?)");
+            stmt=con.prepareStatement("INSERT INTO municipio (cod_municipio, id_provincia) VALUES(?,?)");
             
             stmt.setInt(1, municipio.getCod_municipio());
-            stmt.setString(2, cod_provincia);
+            stmt.setInt(2, municipio.getId_provinciaAjena());
+           
             
             stmt.executeUpdate();
         

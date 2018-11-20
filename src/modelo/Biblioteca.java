@@ -11,6 +11,7 @@ package modelo;
  */
 public class Biblioteca {
     private int id;
+    private int id_municipioAjena;
     private String tipo;
     private String nombre;
     private String direccion;
@@ -23,7 +24,8 @@ public class Biblioteca {
     public Biblioteca() {
     }
 
-    public Biblioteca(String tipo, String nombre, String direccion, String cod_postal, String telefono, String web, String email, String catalogo) {
+    public Biblioteca(int id_municipioAjena, String tipo, String nombre, String direccion, String cod_postal, String telefono, String web, String email, String catalogo) {
+        this.id_municipioAjena = id_municipioAjena;
         this.tipo = tipo;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -33,6 +35,18 @@ public class Biblioteca {
         this.email = email;
         this.catalogo = catalogo;
     }
+
+    
+
+    public int getId_municipioAjena() {
+        return id_municipioAjena;
+    }
+
+    public void setId_municipioAjena(int id_municipioAjena) {
+        this.id_municipioAjena = id_municipioAjena;
+    }
+
+    
 
     public int getId() {
         return id;

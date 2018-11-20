@@ -12,14 +12,25 @@ import java.util.ArrayList;
  * @author Sandra
  */
 public class Provincia {
+    private int id_provincia;
     private int cod_provincia;
     private String nom_provincia;
     private ArrayList<Municipio>municipios=new ArrayList<>();
 
-    public Provincia(int cod_provincia, String num_provincia) {
+    public Provincia(int cod_provincia, String nom_provincia) {
         this.cod_provincia = cod_provincia;
-        this.nom_provincia = num_provincia;
+        this.nom_provincia = nom_provincia;
     }
+
+    public int getId_provincia() {
+        return id_provincia;
+    }
+
+    public void setId_provincia(int id_provincia) {
+        this.id_provincia = id_provincia;
+    }
+
+    
 
     public Provincia() {
     }

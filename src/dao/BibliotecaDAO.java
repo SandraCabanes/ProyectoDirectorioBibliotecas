@@ -64,14 +64,14 @@ public class BibliotecaDAO {
         }
     }
 
-    public void inserta(Connection con, Biblioteca biblioteca, String cod_municipio) throws Exception {
+    public void inserta(Connection con, Biblioteca biblioteca) throws Exception {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO biblioteca (cod_municipio, tipo, nombre, direccion, cod_postal, "
-                    + "telefono, web, email, catalogo) VALUES(?, ?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO biblioteca (id_municipio, tipo, nombre, direccion, cod_postal, "
+                    + "telefono, web, email, catalogo) VALUES(?,?,?,?,?,?,?,?,?)");
 
-            stmt.setString(1, cod_municipio);
+            stmt.setInt(1, biblioteca.getId_municipioAjena());
             stmt.setString(2, biblioteca.getTipo());
             stmt.setString(3, biblioteca.getNombre());
             stmt.setString(4, biblioteca.getDireccion());

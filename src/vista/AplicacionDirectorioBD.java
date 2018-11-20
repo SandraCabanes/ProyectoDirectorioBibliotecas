@@ -27,7 +27,7 @@ public class AplicacionDirectorioBD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
+       /* try {
             Conexion_DB conexion_db = new Conexion_DB();
             System.out.println("Abrir conexión");
             Connection con = conexion_db.AbrirConexion();
@@ -117,12 +117,12 @@ public class AplicacionDirectorioBD {
                 System.out.println(c);
             }*/
             
-            
+            /*
             System.out.println("Cerrar conexión");
             conexion_db.CerrarConexion(con);
         } catch (Exception ex) { 
             Logger.getLogger(AplicacionDirectorioBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Conexión cerrada");
+        System.out.println("Conexión cerrada");*/
     }
 }
