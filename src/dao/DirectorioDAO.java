@@ -6,6 +6,8 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Biblioteca;
@@ -54,5 +56,53 @@ public class DirectorioDAO {
             Logger.getLogger(DirectorioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void cargarClases() {
+
+        DirectorioBibliotecas directBiblio = new DirectorioBibliotecas();
+
+        try {
+            //CONEXION BASE DE DATOS
+            Conexion_DB conexion_db = new Conexion_DB();
+            System.out.println("Abrir conexión");
+            Connection con = conexion_db.AbrirConexion();
+            System.out.println("Conexión abierta");
+
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = con.prepareStatement("SELECT * FROM provincia");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Provincia prov = new Provincia();
+                obtenerProvinciaFila(rs, prov);
+
+                ResultSet rsMuni = null;
+                stmt = con.prepareStatement("SELECT * FROM municipio WHERE id_provincia=?");
+                stmt.setInt(1, prov.getId_provincia());
+                rsMuni = stmt.executeQuery();
+                
+                while(rsMuni.next()){
+                    Municipio muni=new Municipio();
+                    
+                }
+
+                directBiblio.add(prov);
+            }
+
+            //CERRAR CONEXION
+            System.out.println("Cerrar conexión");
+            conexion_db.CerrarConexion(con);
+        } catch (Exception ex) {
+            Logger.getLogger(DirectorioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void obtenerProvinciaFila(ResultSet rs, Provincia provincia) throws Exception {
+        provincia.setId_provincia(rs.getInt("id_provincia"));
+        provincia.setCod_provincia(rs.getInt("cod_provincia"));
+        provincia.setNom_provincia(rs.getString("nom_provincia"));
     }
 }
