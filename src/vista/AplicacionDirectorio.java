@@ -34,7 +34,7 @@ public class AplicacionDirectorio {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, TransformerException {
         Scanner teclado = new Scanner(System.in);
         int op;
-        String cod_provincia, cod_municipio;
+        int cod_provincia, cod_municipio;
 
         Document doc = null;
         File f1 = new File("directorioBibliotecasCV.xml");
@@ -62,23 +62,6 @@ public class AplicacionDirectorio {
 
                 case 2:
                     directorio = ctrlDirect.leer(doc);
-
-                    ProvinciaDAO provDAO = new ProvinciaDAO();
-                    MunicipioDAO munDAO=new MunicipioDAO();
-                    BibliotecaDAO biblioDAO=new BibliotecaDAO();
-                    
-                    for (int i = 0; i < directorio.size(); i++) {
-                        provDAO.inserta(con, directorio.get(i));
-                        for (int j = 0; j < directorio.get(i).getMunicipios().size(); j++) {
-                            cod_provincia=directorio.get(i).getCod_provincia();
-                            munDAO.inserta(con, directorio.get(i).getMunicipios().get(i), cod_provincia);
-                            for (int k = 0; k < directorio.get(i).getMunicipios().get(i).getBibliotecas().size(); k++) {
-                                cod_municipio=directorio.get(i).getMunicipios().get(i).getCod_municipio();
-                                
-                                biblioDAO.inserta(con, directorio.get(i).getMunicipios().get(i).getBibliotecas().get(i), cod_municipio);
-                            }
-                        }
-                    }
                     break;
 
                 case 3:
@@ -92,6 +75,27 @@ public class AplicacionDirectorio {
 
                 case 5:
                     ctrlDirect.guardar(doc, f2);
+                    break;
+                    
+                case 6:
+                    
+                    ProvinciaDAO provDAO = new ProvinciaDAO();
+                    MunicipioDAO munDAO=new MunicipioDAO();
+                    BibliotecaDAO biblioDAO=new BibliotecaDAO();
+                    
+                    
+                    for (int i = 0; i < directorio.size(); i++) {
+                        provDAO.inserta(con, directorio.get(i));
+                        for (int j = 0; j < directorio.get(i).getMunicipios().size(); j++) {
+                            cod_provincia=directorio.get(i).getCod_provincia();
+                            munDAO.inserta(con, directorio.get(i).getMunicipios().get(i), Integer.toString(cod_provincia));
+                            for (int k = 0; k < directorio.get(i).getMunicipios().get(i).getBibliotecas().size(); k++) {
+                                cod_municipio=directorio.get(i).getMunicipios().get(i).getCod_municipio();
+                                
+                                biblioDAO.inserta(con, directorio.get(i).getMunicipios().get(i).getBibliotecas().get(i), Integer.toString(cod_municipio));
+                            }
+                        }
+                    }
                     break;
 
                 case 0:
@@ -121,6 +125,7 @@ public class AplicacionDirectorio {
                 + "3. Mostrar datos\n"
                 + "4. Escribir (OBJETO a DOM)\n"
                 + "5. Emmagatzemar (DOM a XML)\n"
+                + "6. Añadir a la base de datos\n"
                 + "Elige una opción: ");
     }
 }

@@ -12,21 +12,21 @@ import java.util.ArrayList;
  * @author Sandra
  */
 public class Municipio {
-    private String cod_municipio;
+    private int cod_municipio;
     private ArrayList<Biblioteca>bibliotecas=new ArrayList<>();
 
-    public Municipio(String cod_municipio) {
+    public Municipio(int cod_municipio) {
         this.cod_municipio = cod_municipio;
     }
 
     public Municipio() {
     }
 
-    public String getCod_municipio() {
+    public int getCod_municipio() {
         return cod_municipio;
     }
 
-    public void setCod_municipio(String cod_municipio) {
+    public void setCod_municipio(int cod_municipio) {
         this.cod_municipio = cod_municipio;
     }
 

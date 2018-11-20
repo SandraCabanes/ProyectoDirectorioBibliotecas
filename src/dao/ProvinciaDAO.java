@@ -22,7 +22,7 @@ public class ProvinciaDAO {
         try {
             stmt = con.prepareStatement("UPDATE provincia SET nom_provincia=? WHERE cod_provincia=?");
             stmt.setString(1, provincia.getNom_provincia());
-            stmt.setString(2, provincia.getCod_provincia());
+            stmt.setInt(2, provincia.getCod_provincia());
             
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -41,7 +41,7 @@ public class ProvinciaDAO {
         
         try{
            stmt=con.prepareStatement("DELETE FROM provincia WHERE cod_provincia=?");
-           stmt.setString(1, provincia.getCod_provincia());
+           stmt.setInt(1, provincia.getCod_provincia());
            stmt.executeUpdate();
            
         } catch (SQLException ex){
@@ -59,7 +59,7 @@ public class ProvinciaDAO {
         try{
             stmt=con.prepareStatement("INSERT INTO provincia (cod_provincia, nom_provincia) VALUES(?,?)");
             
-            stmt.setString(1, provincia.getCod_provincia());
+            stmt.setInt(1, provincia.getCod_provincia());
             stmt.setString(2, provincia.getNom_provincia());
             
             stmt.executeUpdate();
@@ -75,7 +75,7 @@ public class ProvinciaDAO {
     }
     
     private void obtenProvinciaFila(ResultSet rs, Provincia provincia) throws Exception{
-        provincia.setCod_provincia(rs.getString("cod_provincia"));
+        provincia.setCod_provincia(rs.getInt("cod_provincia"));
         provincia.setNom_provincia(rs.getString("nom_provincia"));
     }
     
@@ -87,7 +87,7 @@ public class ProvinciaDAO {
         try{
          stmt = con.prepareStatement("SELECT * FROM provincia WHERE cod_provincia=?");
          stmt.setString(1, provincia.getNom_provincia());
-         stmt.setString(2, provincia.getCod_provincia());
+         stmt.setInt(2, provincia.getCod_provincia());
          rs = stmt.executeQuery();
             
             while(rs.next()){

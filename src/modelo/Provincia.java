@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @author Sandra
  */
 public class Provincia {
-    private String cod_provincia;
+    private int cod_provincia;
     private String nom_provincia;
     private ArrayList<Municipio>municipios=new ArrayList<>();
 
-    public Provincia(String cod_provincia, String num_provincia) {
+    public Provincia(int cod_provincia, String num_provincia) {
         this.cod_provincia = cod_provincia;
         this.nom_provincia = num_provincia;
     }
@@ -24,11 +24,11 @@ public class Provincia {
     public Provincia() {
     }
 
-    public String getCod_provincia() {
+    public int getCod_provincia() {
         return cod_provincia;
     }
 
-    public void setCod_provincia(String cod_provincia) {
+    public void setCod_provincia(int cod_provincia) {
         this.cod_provincia = cod_provincia;
     }
 

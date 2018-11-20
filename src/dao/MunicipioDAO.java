@@ -39,7 +39,7 @@ public class MunicipioDAO {
         
         try{
            stmt=con.prepareStatement("DELETE FROM municipio WHERE cod_municipio=?");
-           stmt.setString(1, municipio.getCod_municipio());
+           stmt.setInt(1, municipio.getCod_municipio());
            stmt.executeUpdate();
            
         } catch (SQLException ex){
@@ -57,7 +57,7 @@ public class MunicipioDAO {
         try{
             stmt=con.prepareStatement("INSERT INTO municipio (cod_municipio, cod_provincia) VALUES(?,?)");
             
-            stmt.setString(1, municipio.getCod_municipio());
+            stmt.setInt(1, municipio.getCod_municipio());
             stmt.setString(2, cod_provincia);
             
             stmt.executeUpdate();

@@ -48,8 +48,17 @@ public class CtrlProvincia extends CtrlDom {
     private static Provincia leerProvincia(Element elemProvincia) {
         Provincia provincia = new Provincia();
 
-        provincia.setCod_provincia(getValorEtiqueta(ET_CODPROVINCIA, elemProvincia));
-        provincia.setNom_provincia(getValorEtiqueta(ET_NUMPROVINCIA, elemProvincia));
+        String cod = getValorEtiqueta(ET_CODPROVINCIA, elemProvincia);
+        cod = cod.replaceAll(" ", "");
+        cod = cod.replaceAll("\t", "");
+        cod = cod.replaceAll("\n", "");
+        provincia.setCod_provincia(Integer.parseInt(cod));
+
+        String nom = getValorEtiqueta(ET_NUMPROVINCIA, elemProvincia);
+        nom = nom.trim();
+        nom = nom.replaceAll("\t", "");
+        nom = nom.replaceAll("\n", "");
+        provincia.setNom_provincia(nom);
 
         Element elemMunicipio = getElementEtiqueta(ET_MUNICIPIOS, elemProvincia);
         provincia.setMunicipios(leerMunicipios(elemMunicipio));
@@ -66,7 +75,12 @@ public class CtrlProvincia extends CtrlDom {
             if (nMunicipios.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element elemMunicip = (Element) nMunicipios.item(i);
 
-                municip.setCod_municipio(getValorEtiqueta(ET_CODMUNICIPIO, elemMunicip));
+                String cod = getValorEtiqueta(ET_CODMUNICIPIO, elemMunicip);
+                cod = cod.replaceAll(" ", "");
+                cod = cod.replaceAll("\t", "");
+                cod = cod.replaceAll("\n", "");
+                municip.setCod_municipio(Integer.parseInt(cod));
+
                 Element elemBibliotecas = getElementEtiqueta(ET_BIBLIOTECAS, elemMunicip);
                 municip.setBibliotecas(leerBibliotecas(elemBibliotecas));
                 listaMunicipios.add(municip);
@@ -85,14 +99,55 @@ public class CtrlProvincia extends CtrlDom {
             if (listaBiblioteca.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Biblioteca b = new Biblioteca();
                 Element elemBiblio = (Element) listaBiblioteca.item(i);
-                b.setTipo(getValorEtiqueta(ET_TIPO, elemBiblio));
-                b.setNombre(getValorEtiqueta(ET_NOMBRE, elemBiblio));
-                b.setDireccion(getValorEtiqueta(ET_DIRECCION, elemBiblio));
-                b.setCod_postal(getValorEtiqueta(ET_CODPOSTAL, elemBiblio));
-                b.setTelefono(getValorEtiqueta(ET_TELEFONO, elemBiblio));
-                b.setWeb(getValorEtiqueta(ET_WEB, elemBiblio));
-                b.setEmail(getValorEtiqueta(ET_EMAIL, elemBiblio));
-                b.setCatalogo(getValorEtiqueta(ET_CATALOGO, elemBiblio));
+
+                String tipo = getValorEtiqueta(ET_TIPO, elemBiblio);
+                tipo = tipo.trim();
+                tipo = tipo.replaceAll("\t", "");
+                tipo = tipo.replaceAll("\n", "");
+                b.setTipo(tipo);
+                
+                String nombre = getValorEtiqueta(ET_NOMBRE, elemBiblio);
+                nombre = nombre.trim();
+                nombre = nombre.replaceAll("\t", "");
+                nombre = nombre.replaceAll("\n", "");
+                b.setNombre(nombre);
+                
+                String direccion = getValorEtiqueta(ET_DIRECCION, elemBiblio);
+                direccion = direccion.trim();
+                direccion = direccion.replaceAll("\t", "");
+                direccion = direccion.replaceAll("\n", "");
+                b.setDireccion(direccion);
+                
+                String codpostal = getValorEtiqueta(ET_CODPOSTAL, elemBiblio);
+                codpostal = codpostal.trim();
+                codpostal = codpostal.replaceAll("\t", "");
+                codpostal = codpostal.replaceAll("\n", "");
+                b.setCod_postal(codpostal);
+                
+                String telefono = getValorEtiqueta(ET_TELEFONO, elemBiblio);
+                telefono = telefono.trim();
+                telefono = telefono.replaceAll("\t", "");
+                telefono = telefono.replaceAll("\n", "");
+                b.setTelefono(telefono);
+                
+                String web = getValorEtiqueta(ET_WEB, elemBiblio);
+                web = web.trim();
+                web = web.replaceAll("\t", "");
+                web = web.replaceAll("\n", "");
+                b.setWeb(web);
+                
+                String mail = getValorEtiqueta(ET_EMAIL, elemBiblio);
+                mail = mail.trim();
+                mail = mail.replaceAll("\t", "");
+                mail = mail.replaceAll("\n", "");
+                b.setEmail(mail);
+                
+                String catalogo = getValorEtiqueta(ET_CATALOGO, elemBiblio);
+                catalogo = catalogo.trim();
+                catalogo = catalogo.replaceAll("\t", "");
+                catalogo = catalogo.replaceAll("\n", "");
+                b.setCatalogo(catalogo);
+                
 
                 biblios.add(b);
             }
@@ -106,7 +161,8 @@ public class CtrlProvincia extends CtrlDom {
 
         //Cod_provincia
         Element elemCod_prov = doc.createElement(ET_CODPROVINCIA);
-        elemCod_prov.setTextContent(prov.getCod_provincia());
+        elemCod_prov.setTextContent(Integer.toString(prov.getCod_provincia()));
+        //elemCod_prov.setTextContent(prov.getCod_provincia());
         elemProvincia.appendChild(elemCod_prov);
 
         //Num_provincia
@@ -131,7 +187,7 @@ public class CtrlProvincia extends CtrlDom {
 
             //Cod_municipio
             Element elemCod_mun = doc.createElement(ET_CODMUNICIPIO);
-            elemCod_mun.setTextContent(mun.getCod_municipio());
+            elemCod_mun.setTextContent(Integer.toString(mun.getCod_municipio()));
             elemMuni.appendChild(elemCod_mun);
 
             //Bibliotecas
