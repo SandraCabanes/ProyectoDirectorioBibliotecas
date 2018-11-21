@@ -8,6 +8,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Biblioteca;
@@ -58,7 +59,7 @@ public class DirectorioDAO {
 
     }
 
-    public void cargarClases() {
+    public DirectorioBibliotecas cargarClases() {
 
         DirectorioBibliotecas directBiblio = new DirectorioBibliotecas();
 
@@ -83,10 +84,22 @@ public class DirectorioDAO {
                 stmt = con.prepareStatement("SELECT * FROM municipio WHERE id_provincia=?");
                 stmt.setInt(1, prov.getId_provincia());
                 rsMuni = stmt.executeQuery();
-                
-                while(rsMuni.next()){
-                    Municipio muni=new Municipio();
-                    
+
+                while (rsMuni.next()) {
+                    Municipio muni = new Municipio();
+                    obtenerMunicipioFila(rsMuni, muni);
+
+                    ResultSet rsBiblio = null;
+                    stmt = con.prepareStatement("SELECT * FROM biblioteca WHERE id_municipio=?");
+                    stmt.setInt(1, muni.getId_municipio());
+                    rsBiblio = stmt.executeQuery();
+
+                    while (rsBiblio.next()) {
+                        Biblioteca biblio = new Biblioteca();
+                        obtenerBibliotecaFila(rsBiblio, biblio);
+                        muni.getBibliotecas().add(biblio);
+                    }
+                    prov.getMunicipios().add(muni);
                 }
 
                 directBiblio.add(prov);
@@ -98,11 +111,31 @@ public class DirectorioDAO {
         } catch (Exception ex) {
             Logger.getLogger(DirectorioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return directBiblio;
     }
 
     private void obtenerProvinciaFila(ResultSet rs, Provincia provincia) throws Exception {
         provincia.setId_provincia(rs.getInt("id_provincia"));
         provincia.setCod_provincia(rs.getInt("cod_provincia"));
         provincia.setNom_provincia(rs.getString("nom_provincia"));
+    }
+
+    private void obtenerMunicipioFila(ResultSet rsMuni, Municipio municipio) throws SQLException {
+        municipio.setId_municipio(rsMuni.getInt("id_municipio"));
+        municipio.setCod_municipio(rsMuni.getInt("cod_municipio"));
+        municipio.setId_provinciaAjena(rsMuni.getInt("id_provincia"));
+    }
+
+    private void obtenerBibliotecaFila(ResultSet rsBiblio, Biblioteca biblioteca) throws Exception {
+        biblioteca.setId_municipioAjena(rsBiblio.getInt("id_municipio"));
+        biblioteca.setId(rsBiblio.getInt("id_biblioteca"));
+        biblioteca.setTipo(rsBiblio.getString("tipo"));
+        biblioteca.setNombre(rsBiblio.getString("nombre"));
+        biblioteca.setDireccion(rsBiblio.getString("direccion"));
+        biblioteca.setCod_postal(rsBiblio.getString("cod_postal"));
+        biblioteca.setTelefono(rsBiblio.getString("telefono"));
+        biblioteca.setWeb(rsBiblio.getString("web"));
+        biblioteca.setEmail(rsBiblio.getString("email"));
+        biblioteca.setCatalogo(rsBiblio.getString("catalogo"));
     }
 }

@@ -6,17 +6,10 @@
 package vista;
 
 import controlador.CtrlDirectorio;
-import dao.BibliotecaDAO;
-import dao.Conexion_DB;
 import dao.DirectorioDAO;
-import dao.MunicipioDAO;
-import dao.ProvinciaDAO;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import modelo.DirectorioBibliotecas;
@@ -43,6 +36,7 @@ public class AplicacionDirectorio {
         CtrlDirectorio ctrlDirect = new CtrlDirectorio();
         DirectorioBibliotecas directorio = null;
 
+        DirectorioDAO direcDAO=null;
        
             do {
                 menu();
@@ -72,9 +66,14 @@ public class AplicacionDirectorio {
                         break;
 
                     case 6:
-                        DirectorioDAO direcDAO = new DirectorioDAO();
+                        direcDAO = new DirectorioDAO();
                         direcDAO.cargarJDB(directorio);
 
+                        break;
+                        
+                    case 7:
+                        direcDAO = new DirectorioDAO();
+                        directorio=direcDAO.cargarClases();
                         break;
 
                     case 0:
@@ -99,6 +98,7 @@ public class AplicacionDirectorio {
                 + "4. Escribir (OBJETO a DOM)\n"
                 + "5. Emmagatzemar (DOM a XML)\n"
                 + "6. Añadir a la base de datos\n"
+                + "7. Cargar clases de la base de datos\n"
                 + "Elige una opción: ");
     }
 }
